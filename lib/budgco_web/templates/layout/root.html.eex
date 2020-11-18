@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Budgco</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <%= csrf_meta_tag() %>
+  </head>
+  <body>
+    <header>
+      <section class="flex flex-row justify-center w-full">
+        <nav class="flex flex-row" role="navigation">
+          <div class="flex flex-col items-center justify-center w-20 h-20 text-5xl">💰</div>
+          <ul>
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
+              <li><%= link "Dashboard", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.DashboardLive) %></li>
+              <li><%= link "Fantasy", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.FantasyLive) %></li>
+            <% end %>
+          </ul>
+          <%= render "_user_menu.html", assigns %>
+        </nav>
+      </section>
+    </header>
+    <main role="main" class="flex flex-row justify-center w-full">
+      <%= @inner_content %>
+    </main>
+  </body>
+</html>

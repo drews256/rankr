@@ -1,0 +1,26 @@
+<div>Hello!</div>
+<div><%= @current_user.email %></div>
+<div class="flex flex-col px-8 pt-6 my-2 mb-4 bg-white rounded shadow-md">
+  <%= f = form_for :account, "#", [phx_change: :validate, phx_submit: :create_external_account] %>
+    <div class="mb-6 -mx-3 md:flex">
+      <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-first-name">
+          Routing Number
+        </label>
+        <%= text_input f, :routing_number, value: @account["routing_number"], "phx-focus": "focused", "phx-value-field": "routing_number", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "Jane" %>
+        <p class="text-xs italic text-red-400"><%= validation(@account_validation, :first_name, @form_state) %></p>
+      </div>
+
+      <div class="px-3 md:w-1/2">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-last-name">
+          Account Number
+        </label>
+        <%= text_input f, :account_number, value: @account["account_number"], "phx-focus": "focused", "phx-value-field": "account_number", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "Doe" %>
+        <p class="text-xs italic text-red-400"><%= validation(@account_validation, :last_name, @form_state) %></p>
+      </div>
+    </div>
+    <div class="flex flex-row justify-center w-full mb-2">
+      <%= submit button_name(@customer), disabled: !valid(@customer), class: if valid(@customer), do: "rounded cursor-pointer p-2 h-10 flex flex-col justify-center bg-green-400", else: "rounded p-2 h-10 flex flex-col justify-center bg-yellow-200" %>
+    </div>
+  </form>
+</div>

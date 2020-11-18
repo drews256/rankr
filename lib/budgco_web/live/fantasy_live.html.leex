@@ -1,0 +1,31 @@
+<div class="w-full">
+  <h1>Fantasy</h1>
+  <div class="flex flex-row justify-around w-full">
+    <div class="flex flex-row w-4/12 shadow-md rouned-md">
+      &nbsp;
+    </div>
+    <div class="flex flex-row w-4/12">
+
+      <div class="flex flex-col w-full">
+        <%= form_for :search, "#", [phx_change: :search], fn f -> %>
+          <%= text_input f, :for, class: "shadow-md rounded-md" %>
+        <% end %>
+        <div class="flex flex-col h-full max-h-screen m-2 overflow-scroll shadow-md players rounded-md">
+          <%= for player <- @players do %>
+            <div class="flex flex-row p-2 m-2 shadow-md player w-9/10 rounded-md">
+              <div class="flex flex-col w-full">
+                <h3> <%= player["displayName"] %> </h3>
+                <h4> <%= if player["active"] == "1", do: 'Active', else: 'Inactive' %></h4>
+                <div class="flex flex-row justify-around w-full">
+                  <p class="text-xs"> Team: <%= player["team"] %> </p>
+                  <p class="text-xs"> Position: <%= player["position"] %> </p>
+                  <p class="text-xs"> Jersey: <%= player["jersey"] %> </p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

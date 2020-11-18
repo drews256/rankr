@@ -1,0 +1,110 @@
+<div><%= @current_user.email %></div>
+<div class="flex flex-col px-8 pt-6 my-2 mb-4 bg-white rounded shadow-md">
+  <%= f = form_for @customer, "#", [phx_change: :validate, phx_submit: :create_customer] %>
+    <div class="mb-6 -mx-3 md:flex">
+      <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-first-name">
+          First Name
+        </label>
+        <%= text_input f, :first_name, "phx-focus": "focused", "phx-value-field": "first_name", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "Jane" %>
+        <p class="text-xs italic text-red-400"><%= validation(@customer_validation, :first_name, @form_state) %></p>
+      </div>
+
+      <div class="px-3 md:w-1/2">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-last-name">
+          Last Name
+        </label>
+        <%= text_input f, :last_name, "phx-focus": "focused", "phx-value-field": "last_name", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "Doe" %>
+        <p class="text-xs italic text-red-400"><%= validation(@customer_validation, :last_name, @form_state) %></p>
+      </div>
+    </div>
+
+    <div class="mb-6 -mx-3 md:flex">
+      <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-first-name">
+          Phone Number
+        </label>
+        <%= telephone_input f, :phone_number, "phx-focus": "focused", "phx-value-field": "phone_number", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "(970) 946-5380" %>
+        <p class="text-xs italic text-red-400"><%= validation(@customer_validation, :phone_number, @form_state) %></p>
+      </div>
+
+      <div class="px-3 md:w-1/2">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-last-name">
+          Email
+        </label>
+        <%= email_input f, :email, value: @current_user.email, "phx-focus": "focused", "phx-value-field": "email",  class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "ilovebudgets@example.com" %>
+        <p class="text-xs italic text-red-400"><%= validation(@customer_validation, :email, @form_state) %></p>
+      </div>
+    </div>
+
+    <div class="mb-6 -mx-3 md:flex">
+      <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-first-name">
+          Date of Birth
+        </label>
+        <%= date_input f, :date_of_birth, "phx-focus": "focused", "phx-value-field": "phone_number", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "03/14/1993" %>
+        <p class="text-xs italic text-red-400"><%= validation(@customer_validation, :date_of_birth, @form_state) %></p>
+      </div>
+
+      <div class="px-3 md:w-1/2">
+        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-last-name">
+          SSN
+        </label>
+        <%= text_input f, :ssn, "phx-focus": "focused", "phx-value-field": "email",  class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "111-22-3333" %>
+        <p class="text-xs italic text-red-400"><%= validation(@customer_validation, :ssn, @form_state) %></p>
+      </div>
+    </div>
+
+
+    <%= inputs_for f, :address, fn address_form -> %>
+      <div class="mb-6 -mx-3 md:flex">
+        <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+          <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-first-name">
+            Address One
+          </label>
+          <%= text_input address_form, :address_one, "phx-focus": "focused", "phx-value-field": "address_one", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "4308 2nd St." %>
+          <p class="text-xs italic text-red-400"><%= validation(@address_validation, :address_one, @form_state) %></p>
+        </div>
+
+        <div class="px-3 md:w-1/2">
+          <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-last-name">
+            Address Two
+          </label>
+          <%= text_input address_form, :address_two, "phx-focus": "focused", "phx-value-field": "address_two", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "Unit B." %>
+          <p class="text-xs italic text-red-400"><%= validation(@address_validation, :address_two, @form_state) %></p>
+        </div>
+      </div>
+
+      <div class="mb-2 -mx-3 md:flex">
+        <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+          <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-city">
+            City
+          </label>
+          <%= text_input address_form, :city, "phx-focus": "focused", "phx-value-field": "city", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "Albuquerque" %>
+          <p class="text-xs italic text-red-400"><%= validation(@address_validation, :city, @form_state) %></p>
+        </div>
+
+        <div class="px-3 md:w-1/2">
+          <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-state">
+            State
+          </label>
+          <div class="relative">
+            <%= select address_form, :state, ["New Mexico", "Missouri", "Texas"], "phx-focus": "focused", "phx-value-field": "state", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "Albuquerque" %>
+          </div>
+          <p class="text-xs italic text-red-400"><%= validation(@address_validation, :state, @form_state) %></p>
+        </div>
+
+        <div class="px-3 md:w-1/2">
+          <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-zip">
+            Zip
+          </label>
+          <%= text_input address_form, :zip_code, "phx-focus": "focused", "phx-value-field": "zip_code", class: "block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter", placeholder: "98101" %>
+          <p class="text-xs italic text-red-400"><%= validation(@address_validation, :zip_code, @form_state) %></p>
+        </div>
+      </div>
+    <% end %>
+    <div class="flex flex-row justify-center w-full mb-2">
+      <%= submit button_name(@customer), disabled: !valid(@customer), class: if valid(@customer), do: "rounded cursor-pointer p-2 h-10 flex flex-col justify-center bg-green-400", else: "rounded p-2 h-10 flex flex-col justify-center bg-yellow-200" %>
+    </div>
+  </form>
+</div>
