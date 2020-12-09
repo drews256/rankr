@@ -72,9 +72,11 @@ defmodule BudgcoWeb.Router do
     put "/users/settings/update_email", UserSettingsController, :update_email
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
     live "/fantasy", FantasyLive
+    live "/rankings", PersonalRankingsLive
     live "/dashboard", DashboardLive
     live "/dashboard/customer", DashboardCustomerLive
     live "/dashboard/account", DashboardAccountLive
+    live "/home", HomeLive
   end
 
   scope "/", BudgcoWeb do

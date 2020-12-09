@@ -4,8 +4,31 @@ defmodule Budgco.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias Budgco.Repo
+  alias Budgco.{Repo, Ranking}
   alias Budgco.Accounts.{User, UserToken, UserNotifier}
+
+  def get_ranking!(id), do: Repo.get!(Ranking, id)
+
+  def get_ten_live_rankings do
+    Repo.all(
+      from r in Ranking,
+        where: r.live == true,
+        order_by: r.inserted_at,
+        limit: 10
+    )
+  end
+
+  def update_ranking(ranking, attrs) do
+    ranking
+    |> Ranking.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def save_ranking(attrs) do
+    %Ranking{}
+    |> Ranking.changeset(attrs)
+    |> Repo.insert()
+  end
 
   ## Database getters
 

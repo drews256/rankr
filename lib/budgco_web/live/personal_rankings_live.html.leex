@@ -1,0 +1,35 @@
+<div class="w-full rankings">
+  <div class="flex flex-row justify-around w-full">
+    <div class="flex flex-row justify-center w-full">
+      <div class="flex flex-col w-4/12">
+        <h1>Your Rankings</h1>
+        <%= for ranking <- @rankings do %>
+          <div data-ranking-id="<%= ranking.id %>" class="flex flex-row p-2 m-2 shadow-md chosen_player player w-9/10 rounded-md">
+            <div class="flex flex-col w-full">
+              <div class="flex flex-row justify-between w-full">
+                <h3 class="m-0"> <%= ranking.name %> </h3>
+              </div>
+              <div class="flex flex-row justify-between w-full">
+                <div class="flex flex-row">
+                  <div class="my-2 mr-2 <%= if ranking.live == "true", do: "text-color-green", else: "text-color-red" %>">
+                    Live: <%= if ranking.live == true, do: "On", else: "Off" %>
+                  </div>
+                  <div phx-click="make_live" phx-value-live="<%= ranking.live %>" phx-value-ranking-id="<%= ranking.id %>" class="flex flex-row items-center justify-center w-24 h-12 bg-blue-200 border border-blue-600 rounded cursor-pointer select-none">
+                    <div class="text-2xl select-none">
+                      <%= if ranking.live == true, do: "Turn Off", else: "Turn On" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-row justify-around w-full">
+                <p class="text-xs"> Week: <%= ranking.week %> </p>
+                <p class="text-xs"> Position: <%= ranking.position %> </p>
+                <p class="text-xs"> League Type: <%= ranking.league_type %> </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

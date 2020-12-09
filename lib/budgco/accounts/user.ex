@@ -1,5 +1,5 @@
 defmodule Budgco.Accounts.User do
-  alias Budgco.Customer
+  alias Budgco.{Customer, Ranking}
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -11,6 +11,7 @@ defmodule Budgco.Accounts.User do
     field :confirmed_at, :naive_datetime
     field :onboarding_state, :string
     has_one :customer, Customer
+    has_many :rankings, Ranking
 
     timestamps()
   end

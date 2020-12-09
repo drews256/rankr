@@ -19,6 +19,8 @@
               <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
               <li><%= link "Dashboard", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.DashboardLive) %></li>
               <li><%= link "Fantasy", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.FantasyLive) %></li>
+              <li><%= link "My Rankings", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.PersonalRankingsLive) %></li>
+              <li><%= link "Home", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.HomeLive) %></li>
             <% end %>
           </ul>
           <%= render "_user_menu.html", assigns %>

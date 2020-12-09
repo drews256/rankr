@@ -1,18 +1,65 @@
-<div class="w-full">
-  <h1>Fantasy</h1>
+<div id="dragNDropParent" class="w-full rankings" phx-hook="DragNDrop">
   <div class="flex flex-row justify-around w-full">
-    <div class="flex flex-row w-4/12 shadow-md rouned-md">
-      &nbsp;
+    <div class="flex flex-row w-4/12">
+      <div class="flex flex-col w-full">
+        <h1>Ranking</h1>
+        <div class="flex flex-row justify-between w-full">
+          <div class="flex flex-row items-center">
+            <p class="m-0">Position</p>
+            <%= form_for :position_options, "#", [phx_change: :select_position, class: 'flex flex-col px-2'], fn f -> %>
+              <%= select(f, :position, ["QB", "WR", "RB", "TE", "Flex", "Def", "Kicker"] ) %>
+            <% end %>
+          </div>
+          <div class="flex flex-row items-center">
+            <p class="m-0">Week</p>
+            <%= form_for :week_options, "#", [phx_change: :select_week, class: 'flex flex-col px-2'], fn f -> %>
+              <%= select(f, :week, (1..16)) %>
+            <% end %>
+          </div>
+          <div class="flex flex-row items-center">
+            <p class="m-0">League Type</p>
+            <%= form_for :league_type, "#", [phx_change: :league_type, class: 'flex flex-col px-2'], fn f -> %>
+              <%= select(f, :league_type, ["Standard", ".5 PPR", "PPR"] ) %>
+            <% end %>
+          </div>
+          <div phx-click="save" class="flex flex-row items-center justify-center w-24 h-12 bg-blue-200 border border-blue-600 rounded cursor-pointer">
+            <div class="text-2xl">Save</div>
+          </div>
+        </div>
+        <%= form_for :ranking_name, "#", [phx_change: :name, class: 'flex flex-col'], fn f -> %>
+          <%= label f, :name, "Ranking Name" %>
+          <%= text_input f, :for, class: "w-full h-12 shadow-md rounded-md" %>
+        <% end %>
+        <div id="chosen_players" class="flex flex-col w-full h-full max-h-screen p-2 overflow-scroll shadow-md chosen_players rouned-md players rounded-md">
+          <%= for player <- @chosen_players do %>
+            <div data-player-id="<%= player["playerId"] %>" class="flex flex-row p-2 shadow-md chosen_player player w-9/10 rounded-md">
+              <div class="flex flex-col w-full">
+                <div class="flex flex-row justify-between w-full">
+                  <h3> <%= player["displayName"] %> </h3>
+                  <h4> Rank: <%= player["index"] + 1 %></h4>
+                </div>
+                <h4> <%= if player["active"] == "1", do: 'Active', else: 'Inactive' %></h4>
+                <div class="flex flex-row justify-around w-full">
+                  <p class="text-xs"> Team: <%= player["team"] %> </p>
+                  <p class="text-xs"> Position: <%= player["position"] %> </p>
+                  <p class="text-xs"> Jersey: <%= player["jersey"] %> </p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="flex flex-row w-4/12">
-
       <div class="flex flex-col w-full">
-        <%= form_for :search, "#", [phx_change: :search], fn f -> %>
-          <%= text_input f, :for, class: "shadow-md rounded-md" %>
+        <h1>Active Players</h1>
+        <%= form_for :search, "#", [phx_change: :search, class: 'flex flex-col'], fn f -> %>
+          <%= label f, :name, "Search for player" %>
+          <%= text_input f, :for, class: "w-full h-12 shadow-md rounded-md" %>
         <% end %>
-        <div class="flex flex-col h-full max-h-screen m-2 overflow-scroll shadow-md players rounded-md">
-          <%= for player <- @players do %>
-            <div class="flex flex-row p-2 m-2 shadow-md player w-9/10 rounded-md">
+        <div id="players" class="flex flex-col h-full max-h-screen p-2 overflow-scroll shadow-md unused_players rounded-md">
+          <%= for player <- @unchosen_players do %>
+            <div data-player-id="<%= player["playerId"] %>" class="flex flex-row p-2 shadow-md player w-9/10 rounded-md">
               <div class="flex flex-col w-full">
                 <h3> <%= player["displayName"] %> </h3>
                 <h4> <%= if player["active"] == "1", do: 'Active', else: 'Inactive' %></h4>

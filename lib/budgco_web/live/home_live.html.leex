@@ -1,0 +1,20 @@
+<div class="flex flex-row justify-around w-full">
+  <div class="flex flex-col w-4/12">
+    <h1>Rnkr</h1>
+    <h2>The best rankings</h2>
+    <%= for ranking <- @rankings do %>
+      <div data-ranking-id="<%= ranking.id %>" class="flex flex-row w-full p-2 m-2 shadow-md chosen_player player w-9/10 rounded-md">
+        <div class="flex flex-col w-full">
+          <div class="flex flex-row justify-between w-full">
+            <h3 class="m-0"> <%= ranking.name %> </h3>
+          </div>
+          <div class="flex flex-row justify-around w-full">
+            <p class="text-xs"> Week: <%= ranking.week %> </p>
+            <p class="text-xs"> Position: <%= ranking.position %> </p>
+            <p class="text-xs"> League Type: <%= ranking.league_type %> </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
