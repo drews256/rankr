@@ -15,12 +15,12 @@
         <nav class="flex flex-row" role="navigation">
           <div class="flex flex-col items-center justify-center w-20 h-20 text-5xl">💰</div>
           <ul>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
               <li><%= link "Dashboard", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.DashboardLive) %></li>
               <li><%= link "Fantasy", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.FantasyLive) %></li>
               <li><%= link "My Rankings", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.PersonalRankingsLive) %></li>
               <li><%= link "Home", to: Routes.live_path(BudgcoWeb.Endpoint, BudgcoWeb.HomeLive) %></li>
+            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
+              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
             <% end %>
           </ul>
           <%= render "_user_menu.html", assigns %>
