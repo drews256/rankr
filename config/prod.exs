@@ -12,7 +12,7 @@ use Mix.Config
 config :budgco, BudgcoWeb.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  check_origin: ["https://localhost:4000", "https://herokuapp.com"]
+  check_origin: false
 
 # Do not print debug messages in production
 config :logger, level: :info
